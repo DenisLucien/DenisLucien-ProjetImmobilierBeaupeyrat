@@ -6,6 +6,7 @@ use App\Repository\LogementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: LogementRepository::class)]
 class Logement
@@ -34,11 +35,12 @@ class Logement
     private Collection $photos;
 
     #[ORM\Column]
+    #[Gedmo\Timestampable(on: 'create')]
     private ?\DateTimeImmutable $created_at = null;
 
-   
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy:'ownedLogements')]
-    private ?User $owner= null;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ownedLogements')]
+    private ?User $owner = null;
 
     /**
      * @var Collection<int, User>
@@ -160,7 +162,7 @@ class Logement
         return $this;
     }
 
-    
+
     /**
      * @return Collection<int, Photos>
      */
