@@ -1,0 +1,22 @@
+<?php
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+final class PhotosController extends AbstractController
+{
+    #[Route('/api/upload', name: 'api_upload', methods: ['POST'])]
+    public function upload(Request $request): JsonResponse
+    {
+        $file = $request->files->get('file');
+        if (!$file) {
+            return new JsonResponse(['error' => 'No file uploaded'], 400);
+        }
+        $filename = uniqid() . '.' . $file->guessExtension();
+        $file->move($this->getParameter('images_directory'), $filename);
+
+        return new JsonResponse(['filename' => $filename]);
+    }
+}

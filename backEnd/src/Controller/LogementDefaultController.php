@@ -14,7 +14,7 @@ final class LogementDefaultController extends AbstractController
     public function index(LogementRepository $logeRep): JsonResponse
     {
 
-        $logements=$logeRep->findAll();
+        $logements = $logeRep->findAll();
         return $this->json($logements);
     }
 }
