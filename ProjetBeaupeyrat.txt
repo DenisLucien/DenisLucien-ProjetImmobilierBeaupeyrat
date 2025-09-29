@@ -1,0 +1,57 @@
+Lexit JWT Bundle pour le JSON Web Token
+Mercure pour le chat en WebSocket (intégré dans Caddy)
+crispr
+
+🔍 Côté utilisateur (locataire)
+
+Recherche avancée de biens : par ville, prix, surface, nombre de pièces, disponibilité.
+
+Carte interactive (Google Maps / Leaflet) pour afficher les biens géolocalisés.
+
+Système de favoris : sauvegarder des annonces pour les retrouver plus tard.
+
+Formulaire de contact / demande de visite (→ déclenche un envoi d’email automatique au propriétaire).
+
+Espace utilisateur : inscription, connexion sécurisée (JWT, OAuth), profil avec historique de recherches/demandes.
+
+🏠 Côté propriétaire
+
+Tableau de bord propriétaire : ajouter, modifier, supprimer ses annonces.
+
+Upload de photos (gestion du stockage : local ou S3).
+
+Suivi des demandes : voir qui a demandé une visite / contact.
+
+Validation des annonces (si tu veux simuler un rôle admin).
+
+⚙️ Côté technique / backend
+
+Envoi d’emails (confirmation d’inscription, notifications de demande de visite, rappel de rendez-vous).
+
+Gestion des rôles (locataire, propriétaire, admin).
+
+Système de messagerie interne entre locataire et propriétaire (optionnel mais valorisant).
+
+Gestion des disponibilités d’un bien (ex : calendrier, logement déjà loué = plus affiché).
+
+API REST (ou GraphQL) bien structurée, consommée par le front.
+
+🔐 Sécurité & bonnes pratiques
+
+Hash des mots de passe (bcrypt, argon2).
+
+Vérification email après inscription.
+
+Protection des routes sensibles (middleware selon rôle).
+
+Validation des formulaires côté front + back.
+
+🌟 Bonus pour te démarquer
+
+Paiement en ligne simulé (Stripe sandbox) → réservation d’un logement.
+
+Chat en temps réel (Socket.io) entre locataire et propriétaire.
+
+Dashboard admin avec stats (nb de locations, utilisateurs, taux d’occupation) → parfait pour montrer des compétences en data viz (Recharts, Chart.js).
+
+Progressive Web App (PWA) → utilisable même offline.
