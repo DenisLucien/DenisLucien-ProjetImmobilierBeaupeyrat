@@ -2,21 +2,26 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\LogementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LogementRepository::class)]
+#[ApiResource()]
 class Logement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('logement:read')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups('logement:read')]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -32,6 +37,7 @@ class Logement
      * @var Collection<int, Photos>
      */
     #[ORM\OneToMany(targetEntity: Photos::class, mappedBy: 'logement', orphanRemoval: true)]
+    #[Groups('logement:read')]
     private Collection $photos;
 
     #[ORM\Column]

@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\FavorisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: FavorisRepository::class)]
 #[ORM\UniqueConstraint(name: "unique_user_logement", columns: ["user_id", "logement_id"])]
+#[ApiResource()]
 class Favoris
 {
     #[ORM\Id]

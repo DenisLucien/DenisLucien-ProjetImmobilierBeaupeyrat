@@ -8,10 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[ApiResource()]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -39,10 +41,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-       /**
+    /**
      * @var Collection<int, Logement>
      */
-    #[ORM\OneToMany(targetEntity: Logement::class, mappedBy:'owner')]
+    #[ORM\OneToMany(targetEntity: Logement::class, mappedBy: 'owner')]
     private Collection $ownedLogements;
 
     /**
@@ -54,16 +56,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Demands>
      */
-    #[ORM\OneToMany(targetEntity: Demands::class,mappedBy: 'locator', cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: Demands::class, mappedBy: 'locator', cascade: ['persist', 'remove'])]
     private Collection $demands;
 
-   
+
 
     public function __construct()
-    {   
+    {
         $this->ownedLogements = new ArrayCollection();
         $this->rentals = new ArrayCollection();
-        $this->demands= new ArrayCollection();
+        $this->demands = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,7 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -223,7 +225,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-     /**
+    /**
      * @return Collection<int, Demands>
      */
     public function getDemands(): Collection
@@ -244,12 +246,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeDemand(Demands $demand): static
     {
         if ($this->demands->removeElement($demand)) {
-            if($demand->getLocator()===$this){
+            if ($demand->getLocator() === $this) {
                 $demand->setLocator(null);
             }
         }
 
         return $this;
     }
-   
 }

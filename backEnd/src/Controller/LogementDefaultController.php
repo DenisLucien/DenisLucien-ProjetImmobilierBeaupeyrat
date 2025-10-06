@@ -15,6 +15,6 @@ final class LogementDefaultController extends AbstractController
     {
 
         $logements = $logeRep->findAll();
-        return $this->json($logements);
+        return $this->json($logements, 200, [], ['groups' => ['logement:read']]);
     }
 }
