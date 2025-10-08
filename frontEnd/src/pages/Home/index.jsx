@@ -39,6 +39,7 @@ function Home() {
     fetch("http://localhost:8000/api/users")
       .then((res) => res.json())
       .then((data) => {
+        console.log("users");
         console.log(data);
       });
   }, []);
@@ -47,7 +48,7 @@ function Home() {
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <h1>Limmo location</h1>
 
       {logements && logements.length > 0
         ? logements.map((logement) => (

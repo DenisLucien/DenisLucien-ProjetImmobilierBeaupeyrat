@@ -1,12 +1,27 @@
 nav {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding:20px;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
   .navLogo {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 20px;
+  }
+  .navLinks {
+    display: flex;
+    flex-direction: row;
+    li {
+      list-style: none;
+      a {
+        text-decoration: none;
+        color: black;
+        padding: 20px;
+      }
+    }
   }
 }
